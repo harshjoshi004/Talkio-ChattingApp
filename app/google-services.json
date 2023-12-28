@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "262144927665",
+    "project_id": "whattsapp-fafcd",
+    "storage_bucket": "whattsapp-fafcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262144927665:android:69725feed9c727aaa1ff90",
+        "android_client_info": {
+          "package_name": "com.example.whattsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcl-3d3SHQs74AhtKqd8onm0XVvX5ty_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
