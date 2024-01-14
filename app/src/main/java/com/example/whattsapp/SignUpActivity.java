@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,13 +48,18 @@ public class SignUpActivity extends AppCompatActivity {
                 String uname = binding.etUserName.getText().toString();
                 String pass = binding.etPassword.getText().toString();
 
-                (auth.createUserWithEmailAndPassword(id,pass)).addOnCompleteListener(
+                if(TextUtils.isEmpty(id)||TextUtils.isEmpty(uname)||TextUtils.isEmpty(pass)){
+                    progressDialog.dismiss();
+                    Toast.makeText(SignUpActivity.this, "Credentials can't be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    (auth.createUserWithEmailAndPassword(id, pass)).addOnCompleteListener(
                         new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
+                                if (task.isSuccessful()) {
                                     //temporary user created
-                                    Users user = new Users(uname,id,pass);
+                                    Users user = new Users(uname, id, pass);
 
                                     //sent to real time database
                                     String dbId = task.getResult().getUser().getUid();
@@ -66,13 +72,14 @@ public class SignUpActivity extends AppCompatActivity {
                                     //authentication success notifier (unrelated to realtime database work)
                                     progressDialog.dismiss();
                                     Toast.makeText(SignUpActivity.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                                }else {
+                                } else {
                                     progressDialog.dismiss();
-                                    Toast.makeText(SignUpActivity.this, id+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this, id + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
-                );
+                    );
+                }
             }
         });
 

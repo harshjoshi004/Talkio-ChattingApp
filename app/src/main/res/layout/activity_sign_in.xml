@@ -64,7 +64,7 @@
         <Button
             android:id="@+id/btn_sign_in"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:backgroundTint="@color/design_default_color_primary"
             android:padding="15dp"
@@ -74,39 +74,6 @@
             android:textSize="18sp"
             app:cornerRadius="35dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="#FABB04"
-                android:drawableLeft="@drawable/google_color_icon"
-                android:padding="15dp"
-                android:text="GOOGLE"
-                android:textSize="18sp"
-                app:cornerRadius="15dp" />
-
-            <Button
-                android:id="@+id/btn_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="#0866FE"
-                android:drawableLeft="@drawable/facebook_app_round_icon"
-                android:padding="15dp"
-                android:text="FACEBOOK"
-                android:textSize="18sp"
-                app:cornerRadius="15dp" />
-        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
