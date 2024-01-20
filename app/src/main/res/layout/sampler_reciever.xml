@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_reciever"
+    android:layout_marginTop="7dp"
+    android:layout_marginLeft="7dp"
+    android:maxHeight="400dp"
+    android:maxWidth="290dp"
+    android:paddingStart="25dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:minWidth="110dp"
+    android:minHeight="60sp">
+
+    <TextView
+        android:id="@+id/recieverText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:maxWidth="230dp"
+        android:maxHeight="360dp"
+        android:minWidth="30dp"
+
+        android:text="My  "/>
+
+    <TextView
+        android:id="@+id/recieverTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3:09am"
+
+        android:textColor="#96A101"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

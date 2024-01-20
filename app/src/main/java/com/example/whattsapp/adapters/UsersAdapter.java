@@ -2,6 +2,7 @@ package com.example.whattsapp.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.whattsapp.ChatDetailActivity;
 import com.example.whattsapp.R;
 import com.example.whattsapp.models.Users;
 import com.squareup.picasso.Picasso;
@@ -37,6 +40,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
         Users user = list.get(position);
         Picasso.get().load(user.getProfilePic()).placeholder(R.drawable.pfp);
         holder.userName.setText(user.getUserName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChatDetailActivity.class);
+                intent.putExtra("userId",user.getUserId());
+                intent.putExtra("profilePic",user.getProfilePic());
+                intent.putExtra("userName",user.getUserName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
