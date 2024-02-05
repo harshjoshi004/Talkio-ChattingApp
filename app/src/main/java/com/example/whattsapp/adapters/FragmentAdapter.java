@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.whattsapp.fragments.CallsFragment;
 import com.example.whattsapp.fragments.ChatsFragment;
+import com.example.whattsapp.fragments.SettingsFragment;
 import com.example.whattsapp.fragments.StatusFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
@@ -21,7 +22,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 1:
-                return new StatusFragment();
+                return new SettingsFragment();
             case 2:
                 return new CallsFragment();
             default:
@@ -39,7 +40,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         if(position == 0){
             title = "Chats";
         } else if(position == 1){
-            title = "Statuses";
+            title = "Settings";
         } else if(position == 2){
             title = "Calls";
         }

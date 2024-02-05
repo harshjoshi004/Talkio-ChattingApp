@@ -71,7 +71,11 @@ public class SignUpActivity extends AppCompatActivity {
 
                                     //authentication success notifier (unrelated to realtime database work)
                                     progressDialog.dismiss();
+
                                     Toast.makeText(SignUpActivity.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(SignUpActivity.this,SignInActivity.class);
+                                    startActivity(i);
+                                    finish();
                                 } else {
                                     progressDialog.dismiss();
                                     Toast.makeText(SignUpActivity.this, id + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -88,6 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

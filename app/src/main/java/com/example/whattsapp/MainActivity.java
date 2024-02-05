@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         auth = FirebaseAuth.getInstance();
-
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.horiz));
         binding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
             auth.signOut();
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
             startActivity(intent);
+            finish();
         }
+
         return true;
     }
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/settings"
         android:title="Settings"
@@ -9,4 +8,5 @@
         android:id="@+id/log_out"
         android:title="Logout"
         android:visible="true" />
+
 </menu>

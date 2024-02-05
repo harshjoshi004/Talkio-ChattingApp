@@ -3,7 +3,7 @@ package com.example.whattsapp.models;
 public class Users {
     String userName, userId;
     String mail, password;
-    String profilePic, lastMessage;
+    String profilePic, lastMessage, status;
 
     public Users() {
         //empty constructor
@@ -24,6 +24,14 @@ public class Users {
         this.password = password;
         this.profilePic = profilePic;
         this.lastMessage = lastMessage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUserName() {

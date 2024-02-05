@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ChatDetailActivity.this,MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,27 +90,30 @@ public class ChatDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String message = binding.editTextText.getText().toString();
-                final MessageModel model = new MessageModel(senderId,message);
-                model.setTimeStamp(new Date().getTime());
+                if(!TextUtils.isEmpty(message)) {
+                    final MessageModel model = new MessageModel(senderId, message);
+                    model.setTimeStamp(new Date().getTime());
 
-                binding.editTextText.setText("");
-                database.getReference().child("chats")
-                        .child(senderRoom)
-                        .push()
-                        .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                database.getReference().child("chats")
-                                        .child(recieverRoom)
-                                        .push()
-                                        .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
+                    binding.editTextText.setText("");
+                    database.getReference().child("chats")
+                            .child(senderRoom)
+                            .push()
+                            .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    database.getReference().child("chats")
+                                            .child(recieverRoom)
+                                            .push()
+                                            .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
 
-                                            }
-                                        });
-                            }
-                        });
+                                                }
+                                            });
+                                }});
+                } else {
+                    Toast.makeText(ChatDetailActivity.this, "type something first..", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
