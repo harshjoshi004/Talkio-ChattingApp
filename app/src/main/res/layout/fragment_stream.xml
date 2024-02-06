@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/stream_bg"
+    android:textAlignment="viewEnd"
+    tools:context=".fragments.StreamFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/streamRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/linearStream"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/linearStream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#D7C1FF"
+
+        android:backgroundTint="#D7C1FF"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/enterMessageStream"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="Enter Message"
+            android:inputType="text"
+            android:paddingLeft="10dp" />
+
+        <Button
+            android:id="@+id/sendButtonStream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#B571DA"
+            android:text="Send"
+            android:textSize="12sp"
+            app:icon="@android:drawable/sym_action_chat"
+            app:iconSize="25dp" />
+    </LinearLayout>
+
+</RelativeLayout>

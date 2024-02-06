@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.whattsapp.MainActivity;
 import com.example.whattsapp.R;
+import com.example.whattsapp.SignInActivity;
 import com.example.whattsapp.databinding.FragmentSettingsBinding;
 import com.example.whattsapp.models.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +38,7 @@ public class SettingsFragment extends Fragment {
     FirebaseStorage storage;
     FirebaseAuth auth;
     FirebaseDatabase database;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -45,12 +47,11 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentSettingsBinding.inflate(inflater,container,false);
+        binding = FragmentSettingsBinding.inflate(inflater, container, false);
         //code
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
-
 
 
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -74,20 +75,28 @@ public class SettingsFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setAction(intent.ACTION_GET_CONTENT);
                 intent.setType("image/*"); //*/*
-                startActivityForResult(intent,33);
+                startActivityForResult(intent, 33);
             }
         });
-
+        binding.btnLogOutSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Intent intent = new Intent(getContext(), SignInActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         binding.btnSaveSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newStatus,newName;
+                String newStatus, newName;
                 newStatus = binding.etAboutSettings.getText().toString();
                 newName = binding.etUserNameSettings.getText().toString();
                 //to update multiple attributes make a key,value hashmap
                 HashMap<String, Object> obj = new HashMap<>();
-                obj.put("userName",newName);
-                obj.put("status",newStatus);
+                obj.put("userName", newName);
+                obj.put("status", newStatus);
 
                 database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).updateChildren(obj);
                 Toast.makeText(getContext(), "Settings Saved!", Toast.LENGTH_SHORT).show();
@@ -120,12 +129,12 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data.getData()!=null){ //if user sets an image then this branch
+        if (data.getData() != null) { //if user sets an image then this branch
             Uri sFile = data.getData();
             //URI = uniform resource identifier
             binding.ivSettingsProfileImage.setImageURI(sFile);
 
-            final StorageReference storageRef= storage.getReference().child("profilePicture").child(FirebaseAuth.getInstance().getUid());
+            final StorageReference storageRef = storage.getReference().child("profilePicture").child(FirebaseAuth.getInstance().getUid());
             storageRef.putFile(sFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

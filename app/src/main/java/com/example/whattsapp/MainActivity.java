@@ -2,6 +2,7 @@ package com.example.whattsapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,11 +22,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         auth = FirebaseAuth.getInstance();
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Talkio");
         getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.horiz));
         binding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         binding.tabLayout.setupWithViewPager(binding.viewPager);
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.settings){
-            Toast.makeText(this, "Settings is under construction..", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+            finish();
         }
         else if(item.getItemId() == R.id.log_out){
             auth.signOut();

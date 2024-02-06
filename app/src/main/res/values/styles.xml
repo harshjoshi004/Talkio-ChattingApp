@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Your custom theme -->
+    <style name="YourCustomTheme" parent="Theme.Material3.Light">
+        <!-- Add other theme attributes as needed -->
+    </style>
+
+    <!-- Add other styles as needed -->
+</resources>

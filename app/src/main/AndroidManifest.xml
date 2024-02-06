@@ -10,8 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher3_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WhattsApp"
+        android:theme="@style/YourCustomTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -21,14 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ChatDetailActivity"
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />

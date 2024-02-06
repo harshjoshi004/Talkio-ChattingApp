@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="YourCustomTheme" parent="Theme.Material3.Light">
+        <item name="android:forceDarkAllowed">false</item>
+        <!-- Add other theme attributes as needed -->
+    </style>
+</resources>

@@ -3,7 +3,7 @@ package com.example.whattsapp.models;
 public class Users {
     String userName, userId;
     String mail, password;
-    String profilePic, lastMessage, status;
+    String profilePic, lastMessage, status = "Hey There.. I'm using Talkio!";
 
     public Users() {
         //empty constructor

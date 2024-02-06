@@ -9,6 +9,7 @@ import com.example.whattsapp.fragments.CallsFragment;
 import com.example.whattsapp.fragments.ChatsFragment;
 import com.example.whattsapp.fragments.SettingsFragment;
 import com.example.whattsapp.fragments.StatusFragment;
+import com.example.whattsapp.fragments.StreamFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     public FragmentAdapter(@NonNull FragmentManager fm) {
@@ -22,9 +23,9 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 1:
-                return new SettingsFragment();
+                return new StreamFragment();
             case 2:
-                return new CallsFragment();
+                return new SettingsFragment();
             default:
                 return new ChatsFragment();
         }
@@ -40,9 +41,9 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         if(position == 0){
             title = "Chats";
         } else if(position == 1){
-            title = "Settings";
+            title = "Stream";
         } else if(position == 2){
-            title = "Calls";
+            title = "Settings";
         }
         return title;
     }

@@ -46,7 +46,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
         Users user = list.get(position);
         Picasso.get().load(user.getProfilePic()).placeholder(R.drawable.pfp).into(holder.image);
         holder.userName.setText(user.getUserName());
-
+        holder.lastMessage.setText(user.getStatus());
+        
         FirebaseDatabase.getInstance().getReference().child("chats")
                         .child(FirebaseAuth.getInstance().getUid() + user.getUserId())
                                 .orderByChild("timeStamp")

@@ -73,9 +73,27 @@ public class SignUpActivity extends AppCompatActivity {
                                     progressDialog.dismiss();
 
                                     Toast.makeText(SignUpActivity.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(SignUpActivity.this,SignInActivity.class);
-                                    startActivity(i);
-                                    finish();
+
+                                                            //sign in code
+                                    (auth.signInWithEmailAndPassword(id, pass)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            progressDialog.dismiss();
+                                            if (task.isSuccessful()) {
+
+                                                Toast.makeText(SignUpActivity.this, "Welcome to Talkio!", Toast.LENGTH_SHORT).show();
+
+                                                //Go To Main Activity
+                                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                    });
+
                                 } else {
                                     progressDialog.dismiss();
                                     Toast.makeText(SignUpActivity.this, id + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
