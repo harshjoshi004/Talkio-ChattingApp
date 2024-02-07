@@ -1,5 +1,6 @@
 package com.example.whattsapp.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class SettingsFragment extends Fragment {
     FirebaseStorage storage;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    ProgressDialog progressDialog2;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -52,7 +54,6 @@ public class SettingsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
-
 
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -99,6 +100,7 @@ public class SettingsFragment extends Fragment {
                 obj.put("status", newStatus);
 
                 database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).updateChildren(obj);
+
                 Toast.makeText(getContext(), "Settings Saved!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,14 +109,20 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users user = snapshot.getValue(Users.class);
-                Picasso.get()
-                        .load(user.getProfilePic())
-                        .placeholder(R.drawable.pfp)
-                        .into(binding.ivSettingsProfileImage);
+                //changed code
+                if (user.getProfilePic() != null ) {
+                    // Process the selected image
+                    Picasso.get()
+                            .load(user.getProfilePic())
+                            .placeholder(R.drawable.pfp)
+                            .into(binding.ivSettingsProfileImage);
+                }
 
                 binding.etAboutSettings.setText(user.getStatus());
                 //binding.etAboutSettings.setHint("'you' in one sentence!");
                 binding.etUserNameSettings.setText(user.getUserName());
+
+
             }
 
             @Override
@@ -129,7 +137,13 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data.getData() != null) { //if user sets an image then this branch
+        if (data!=null && data.getData() != null) { //if user sets an image then this branch
+            progressDialog2 = new ProgressDialog(getContext());
+            progressDialog2.setCancelable(false); // Make it not dismissable
+            progressDialog2.setTitle("Wait a sec..");
+            progressDialog2.setMessage("Changing Profile Picture..");
+            progressDialog2.show();
+
             Uri sFile = data.getData();
             //URI = uniform resource identifier
             binding.ivSettingsProfileImage.setImageURI(sFile);
@@ -146,6 +160,9 @@ public class SettingsFragment extends Fragment {
                         }
                     });
 
+                    if (progressDialog2.isShowing()) {
+                        progressDialog2.dismiss();
+                    }
                     Toast.makeText(getContext(), "Image Uploaded successfuly!", Toast.LENGTH_SHORT).show();
                 }
             });
