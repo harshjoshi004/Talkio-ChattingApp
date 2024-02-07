@@ -1,9 +1,11 @@
 package com.example.whattsapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -58,40 +60,61 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        // Inside your onOptionsItemSelected method, for the delete_account case
         else if(item.getItemId() == R.id.delete_account){
-            auth = FirebaseAuth.getInstance(); // Ensure that auth is initialized
-            CurUser = auth.getCurrentUser();
-            if(CurUser != null){
-                // Get the user ID before deleting the user
-                final String userId = CurUser.getUid();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Confirm Deletion");
+            builder.setMessage("Are you sure you want to delete your account? This action cannot be undone.");
 
-                CurUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            // Delete user data from the Realtime Database
-                            FirebaseDatabase.getInstance().getReference().child("Users").child(userId).removeValue();
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User confirmed, proceed with deletion
+                    deleteUserAccount();
+                }
+            });
 
-                            // You might also need to delete the user's chats and other related data
-                            // DatabaseReference chatsRef = FirebaseDatabase.getInstance().getReference().child("Chats").child(userId);
-                            // chatsRef.removeValue();
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User canceled deletion
+                    dialog.dismiss();
+                }
+            });
 
-                            Intent delint = new Intent(MainActivity.this, SignInActivity.class);
-                            startActivity(delint);
-                            finish();
-                            Toast.makeText(MainActivity.this, "User Deleted Successfully..", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If the deletion fails, you can check the exception message
-                            Toast.makeText(MainActivity.this, "Failed to delete user: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            } else {
-                // Handle the case where the user is not signed in
-                Toast.makeText(MainActivity.this, "User not signed in", Toast.LENGTH_SHORT).show();
-            }
+            builder.show();
         }
+
         return true;
+    }
+    private void deleteUserAccount() {
+        CurUser = auth.getCurrentUser();
+        if (CurUser != null) {
+            CurUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+
+                        // Delete user data from the Realtime Database
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(CurUser.getUid()).removeValue();
+                        Intent delint = new Intent(MainActivity.this, SignInActivity.class);
+                        startActivity(delint);
+                        finish();
+                        Toast.makeText(MainActivity.this, "User Deleted Successfully..", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Exception exception = task.getException();
+                        if (exception != null) {
+                            exception.printStackTrace();
+                        }
+                        Toast.makeText(MainActivity.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            
+            Toast.makeText(MainActivity.this, "User not signed in", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
