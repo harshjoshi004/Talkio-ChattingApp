@@ -1,7 +1,7 @@
 Talkio- A Chatting Application
 
 Apk File Download Link: 
-https://drive.google.com/file/d/1xsbTKxhM8RzHaZv8bFwRV3HFHR1VRlPx/view?usp=sharing
+https://drive.google.com/drive/u/1/folders/1PQevRck3C0wCxlSavh8litwag9FGJ5O_
 
 Features:
   - Authentication using firebase-authentication
