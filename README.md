@@ -23,7 +23,6 @@
  - Firebase Firestore for status and prole updat
     
 ## Screenshots: 
-![chat_screen](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/de7a08e0-21c6-4115-be28-4e6971e90a69)
 ![ss7](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/86c422aa-038b-41a9-ba78-9eb768474822)
 ![ss6](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/c3dd72c7-a7e8-4ab0-a62b-d77052437c7d)
 ![ss5](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/043028d7-6980-47cf-9e64-aecebfee2c37)
@@ -31,9 +30,6 @@
 ![ss3](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/1ccb2651-2f63-42b6-abcb-be83dccce9e4)
 ![ss2](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/79707d0b-fdbf-473d-8fb8-69727ae18e72)
 ![ss1](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/3550d976-c4d4-47d9-9fa7-8877fbb483c8)
-![splash_screen](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/a8eaf70f-2826-4175-96a7-aa555e4eb3ad)
-![schat_screen_typing](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/09ef1040-6bae-4e89-b983-548ebfbc9b42)
-![profile_pic_feature](https://github.com/harshjoshi004/Talkio-ChattingApp/assets/138373025/b760d22d-53ff-4cca-9d51-9a4e345e3d96)
 
 
 
